@@ -3,124 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة 15 نوعاً من عصافير الزينة</title>
+    <title>موسوعة عصافير الزينة التفاعلية</title>
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 0; background-color: #f4f7f5; color: #2c3e50; }
-        header { background: linear-gradient(135deg, #1e5631, #4c9a2a); color: white; text-align: center; padding: 30px 20px; }
-        .audio-box { margin-top: 10px; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 20px; display: inline-block; }
-        nav { background-color: #2c3e50; text-align: center; padding: 10px; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; text-decoration: none; padding: 5px 8px; margin: 2px; display: inline-block; border-radius: 4px; font-size: 0.8rem; background-color: #34495e; }
-        .container { max-width: 800px; margin: 30px auto; padding: 0 15px; }
-        .bird-card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 25px; overflow: hidden; border-right: 6px solid #4c9a2a; }
-        .bird-card-img { width: 100%; height: 280px; }
-        .bird-card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .bird-card-body { padding: 20px; }
-        .bird-card-body h2 { color: #1e5631; margin: 0 0 10px 0; font-size: 1.5rem; }
-        .info-list { background: #f9f9f9; padding: 10px 20px; border-radius: 8px; list-style-type: square; margin: 10px 0 0 0; }
-        footer { background-color: #2c3e50; color: white; text-align: center; padding: 15px; margin-top: 30px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; background-color: #f0f4f1; color: #2c3e50; }
+        header { background: linear-gradient(135deg, #1b5e20, #4caf50); color: white; text-align: center; padding: 30px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 2.2rem; }
+        .audio-box { margin-top: 15px; background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; display: inline-block; }
+        
+        /* تقسيم الصفحة الجانبي أو العلوي للأقسام */
+        .wrapper { max-width: 1100px; margin: 30px auto; padding: 0 15px; display: flex; flex-wrap: wrap; gap: 20px; }
+        
+        /* قائمة الأقسام (الأزرار) */
+        .tabs-menu { flex: 1; min-width: 250px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); height: fit-content; }
+        .tabs-menu h3 { margin-top: 0; color: #1b5e20; border-bottom: 2px solid #edf2f7; padding-bottom: 10px; text-align: center; }
+        .tab-btn { width: 100%; background: #f8faf9; border: 1px solid #e2e8f0; padding: 12px; text-align: right; margin-bottom: 8px; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: bold; color: #4a5568; transition: 0.3s; }
+        .tab-btn:hover { background: #e8f5e9; color: #1b5e20; }
+        .tab-btn.active { background: #4caf50; color: white; border-color: #4caf50; box-shadow: 0 4px 8px rgba(76,175,80,0.3); }
+
+        /* منطقة العرض الخاصة بكل قسم */
+        .display-panel { flex: 2.5; min-width: 320px; }
+        .bird-section { background: white; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); overflow: hidden; display: none; border-top: 6px solid #4caf50; }
+        .bird-section.active { display: block; animation: fadeIn 0.5s ease; }
+
+        .bird-img { width: 100%; height: 350px; }
+        .bird-img img { width: 100%; height: 100%; object-fit: cover; }
+        .bird-content { padding: 30px; }
+        .bird-content h2 { color: #1b5e20; margin-top: 0; font-size: 1.8rem; }
+        .bird-content p { line-height: 1.8; color: #4a5568; font-size: 1.05rem; }
+        
+        .info-table { width: 100%; margin-top: 20px; border-collapse: collapse; background: #f9fbf9; border-radius: 8px; overflow: hidden; }
+        .info-table td { padding: 12px 15px; border-bottom: 1px solid #edf2f7; }
+        .info-table td.title { font-weight: bold; color: #2c3e50; width: 30%; background: #edf5ed; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer { background-color: #2c3e50; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        @media (max-width: 768px) { .wrapper { flex-direction: column; } .bird-img { height: 230px; } }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>الموسوعة الكبرى لطيور وعصافير الزينة</h1>
-        <p>دليلك الشامل والمصور لـ 15 نوعاً من أجمل الطيور المنزلية</p>
+        <h1>الموسوعة التفاعلية لعصافير الزينة</h1>
+        <p>اختر نوع الطائر من القائمة الجانبية لاستكشاف معلوماته وصوره بشكل مستقل</p>
         <div class="audio-box">
-            <span style="font-size: 0.9rem; display:block; margin-bottom:5px;">🎵 اضغط Play لسماع صوت زقزقة العصافير:</span>
-            <audio controls loop style="height:30px;">
-                <source src="https://www.soundjay.com/nature/sounds/canary-singing-01.mp3" type="audio/mpeg">
-            </audio>
+            <span style="font-size: 0.9rem; display:block; margin-bottom:5px;">🎵 اضغط تشغيل لسماع صوت الطيور الحقيقي:</span>
+            <audio controls loop style="height:30px;"><source src="https://www.soundjay.com/nature/sounds/canary-singing-01.mp3" type="audio/mpeg"></audio>
         </div>
     </header>
 
-    <nav>
-        <a href="#b1">1. البادجي</a> <a href="#b2">2. الكوكاتيل</a> <a href="#b3">3. الكناري</a> <a href="#b4">4. الزيبرا</a> <a href="#b5">5. غولدين فينش</a> 
-        <a href="#b6">6. الروز</a> <a href="#b7">7. الفيشر</a> <a href="#b8">8. الجاوة</a> <a href="#b9">9. الكاكايركي</a> <a href="#b10">10. الباركيت</a> 
-        <a href="#b11">11. الموزايك</a> <a href="#b12">12. الحسون</a> <a href="#b13">13. الكاردينال</a> <a href="#b14">14. البنجالي</a> <a href="#b15">15. الكويكر</a>
-    </nav>
-
-    <div class="container">
-
-        <div id="b1" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/56733/pexels-photo-56733.jpeg?auto=compress&cs=tinysrgb&w=600" alt="البادجي"></div>
-            <div class="bird-card-body"><h2>1. طائر البادجي الأسترالي</h2><p>طائر نشيط جداً وسهل التربية، ويعتبر الاختيار الأول لكل مبتدئ.</p><ul class="info-list"><li><b>الغذاء:</b> البنكم والفلارس والخضروات</li><li><b>الميزة:</b> ألوانه كثيرة ويتعلم التصفير واللعب</li></ul></div>
+    <div class="wrapper">
+        
+        <!-- الأقسام / الأزرار الجانبية -->
+        <div class="tabs-menu">
+            <h3>قائمة الأنواع (15 نوع)</h3>
+            <button class="tab-btn active" onclick="openBird(event, 'b1')">1. البادجي الأسترالي</button>
+            <button class="tab-btn" onclick="openBird(event, 'b2')">2. ببغاء الكوكاتيل</button>
+            <button class="tab-btn" onclick="openBird(event, 'b3')">3. الكناري الصداح</button>
+            <button class="tab-btn" onclick="openBird(event, 'b4')">4. عصفور الزيبرا</button>
+            <button class="tab-btn" onclick="openBird(event, 'b5')">5. غولدين فينش</button>
+            <button class="tab-btn" onclick="openBird(event, 'b6')">6. طيور الروز</button>
+            <button class="tab-btn" onclick="openBird(event, 'b7')">7. طيور الفيشر</button>
+            <button class="tab-btn" onclick="openBird(event, 'b8')">8. عصفور جاوة</button>
+            <button class="tab-btn" onclick="openBird(event, 'b9')">9. ببغاء الكاكاريكي</button>
+            <button class="tab-btn" onclick="openBird(event, 'b10')">10. الباركيت الأخضر</button>
+            <button class="tab-btn" onclick="openBird(event, 'b11')">11. كناري الموزايك</button>
+            <button class="tab-btn" onclick="openBird(event, 'b12')">12. طائر الحسون</button>
+            <button class="tab-btn" onclick="openBird(event, 'b13')">13. الكاردينال الأحمر</button>
+            <button class="tab-btn" onclick="openBird(event, 'b14')">14. البنجالي فينش</button>
+            <button class="tab-btn" onclick="openBird(event, 'b15')">15. ببغاء الكويكر</button>
         </div>
 
-        <div id="b2" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/2613447/pexels-photo-2613447.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الكوكاتيل"></div>
-            <div class="bird-card-body"><h2>2. ببغاء الكوكاتيل</h2><p>يمتاز بالعرف الجميل وبقع الخدود البرتقالية، وهو أليف جداً ويحب البشر.</p><ul class="info-list"><li><b>الغذاء:</b> بذور عباد الشمس والفلارس الكبيرة</li><li><b>الميزة:</b> يقلد النغمات والأصوات ببراعة</li></ul></div>
-        </div>
+        <!-- لوحة العرض التفاعلية للأقسام -->
+        <div class="display-panel">
 
-        <div id="b3" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/4090009/pexels-photo-4090009.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الكناري"></div>
-            <div class="bird-card-body"><h2>3. طائر الكناري الصداح</h2><p>طائر رقيق يقتنى أساساً لجمال صوته وتغريده الساحر الذي يملأ المكان بهجة.</p><ul class="info-list"><li><b>الغذاء:</b> بذور الكناري السوداء والجرجير</li><li><b>الميزة:</b> صوت تغريد قوي وعذب للغاية</li></ul></div>
-        </div>
+            <!-- قسم 1 -->
+            <div id="b1" class="bird-section active">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/56733/pexels-photo-56733.jpeg?auto=compress&w=700" alt="البادجي"></div>
+                <div class="bird-content">
+                    <h2>طائر البادجي الأسترالي</h2>
+                    <p>طائر نشيط جداً وسهل التربية، ويمتاز بفضوله وحبه للعب، وهو الاختيار الأول والمثالي لكل مبتدئ في هذه الهواية لسهولة تفريخه وألوانه المتنوعة.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>خلطة حبوب البنكم والفلارس والدنيبة، والجرجير الطازج</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 5 إلى 9 سنوات في الأقفاص المنزلية</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b4" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/9754124/pexels-photo-9754124.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الزيبرا"></div>
-            <div class="bird-card-body"><h2>4. عصفور الزيبرا فينش</h2><p>عصافير صغيرة ورشيقة للغاية، لا تتوقف عن الحركة وتصدر زقزقة مستمرة شبيهة بالألعاب.</p><ul class="info-list"><li><b>الغذاء:</b> حبوب البنكم الناعمة والبيض بالبقسماط</li><li><b>الميزة:</b> إنتاج سريع جداً وعشوش متتالية</li></ul></div>
-        </div>
+            <!-- قسم 2 -->
+            <div id="b2" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/2613447/pexels-photo-2613447.jpeg?auto=compress&w=700" alt="الكوكاتيل"></div>
+                <div class="bird-content">
+                    <h2>ببغاء الكوكاتيل الأليف</h2>
+                    <p>يمتاز بالعرف الجميل المتحرك فوق رأسه وبقع الخدود البرتقالية الساحرة. الكوكاتيل طائر ذكي وودود جداً، ويمكن للذكور تعلم تصفير نغمات كاملة وتقليد بعض الكلمات بوضوح.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>بذور عباد الشمس، خلطات الباركيت، والفواكه المجففة</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 10 إلى 15 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b5" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/6152261/pexels-photo-6152261.jpeg?auto=compress&cs=tinysrgb&w=600" alt="غولدين فينش"></div>
-            <div class="bird-card-body"><h2>5. طائر غولدين فينش</h2><p>يعتبره الكثيرون أجمل طائر زينة في العالم بسبب ألوان ريشه المتداخلة والمبدعة.</p><ul class="info-list"><li><b>الغذاء:</b> خلطات الفينش الفاخرة والفيتامينات</li><li><b>الميزة:</b> مظهر جمالي فريد يسر الناظرين</li></ul></div>
-        </div>
+            <!-- قسم 3 -->
+            <div id="b3" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/4090009/pexels-photo-4090009.jpeg?auto=compress&w=700" alt="الكناري"></div>
+                <div class="bird-content">
+                    <h2>طائر الكناري الصداح</h2>
+                    <p>ملك التغريد العذب بلا منازع. لا يحب الكناري اللمس أو اللعب اليدوي بل يُقتنى أساساً للاستمتاع بمنظره الجذاب وتغريداته الطويلة المنسقة، والذكور هي التي تغرد بشكل أساسي.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>بذور الكناري الخاصة (الفلارس)، البروكلي، والتفاح</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 7 إلى 11 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b6" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/3250454/pexels-photo-3250454.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الوز"></div>
-            <div class="bird-card-body"><h2>6. طيور الحب - الروز</h2><p>سميت بطيور الحب لشدة ارتباط الزوجين ببعضهما، وهي طيور عنيدة وذكية وقوية.</p><ul class="info-list"><li><b>الغذاء:</b> اللب السوري والبنكم والفلارس</li><li><b>الميزة:</b> شديدة التعلق بصاحبها لو رُبيت منذ الصغر</li></ul></div>
-        </div>
+            <!-- قسم 4 -->
+            <div id="b4" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/9754124/pexels-photo-9754124.jpeg?auto=compress&w=700" alt="الزيبرا"></div>
+                <div class="bird-content">
+                    <h2>عصفور الزيبرا فينش</h2>
+                    <p>عصافير صغيرة ورشيقة للغاية، لا تتوقف عن الحركة وتصدر زقزقة مستمرة شبيهة بالألعاب اللطيفة. تتميز بإنتاجها السريع جداً وبنائها المستمر للأعشاش بشتى الخامات.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>حبوب البنكم الناعمة، ووجبات البيض المسلوق بالبقسماط</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 3 إلى 5 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b7" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/2085859/pexels-photo-2085859.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الفيشر"></div>
-            <div class="bird-card-body"><h2>7. طيور الحب - الفيشر</h2><p>تتميز بوجود حلقة بيضاء واضحة حول العين، وألوانها زاهية تجمع بين الأخضر والبرتقالي.</p><ul class="info-list"><li><b>الغذاء:</b> الحبوب المشكلة والفواكه الطازجة</li><li><b>الميزة:</b> نشاط وقوة جسدية ومظهر مبهج</li></ul></div>
-        </div>
+            <!-- قسم 5 -->
+            <div id="b5" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/6152261/pexels-photo-6152261.jpeg?auto=compress&w=700" alt="غولدين فينش"></div>
+                <div class="bird-content">
+                    <h2>طائر غولدين فينش الملون</h2>
+                    <p>يعتبره الكثيرون أجمل طائر زينة في العالم نظراً للوحته الربانية المذهلة وتداخل الألوان الزاهية في ريشه الصغير. هو طائر حساس ويحتاج لعناية فائقة وتجنب تيارات الهواء.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>خلطات الفينش الفاخرة والفيتامينات والمستنبت</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 5 إلى 7 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b8" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/9310344/pexels-photo-9310344.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الجاوة"></div>
-            <div class="bird-card-body"><h2>8. عصفور جاوة</h2><p>طائر هادئ وكبير الحجم نسبياً، يمتاز بمنقاره الأحمر الكبير وخدوده البيضاء الدائرية.</p><ul class="info-list"><li><b>الغذاء:</b> الأرز الشعير وبذور الفلارس</li><li><b>الميزة:</b> هدوء شديد في الأقفاص وشكل منسق جداً</li></ul></div>
-        </div>
+            <!-- قسم 6 -->
+            <div id="b6" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/3250454/pexels-photo-3250454.jpeg?auto=compress&w=700" alt="الروز"></div>
+                <div class="bird-content">
+                    <h2>طيور الحب - الروز</h2>
+                    <p>سميت بطيور الحب لشدة ارتباط الزوجين ببعضهما مدى الحياة. تنتمي لفصيلة الببغاوات الصغيرة، وهي طيور ذكية جداً، ولعوبة وعنيدة، وتتعلق بالمربي بشدة لو رُبيت منذ الصغر.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>اللب السوري، حبوب الفلارس والبنكم، والفواكه</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 10 إلى 12 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b9" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/10360844/pexels-photo-10360844.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الكاكاريكي"></div>
-            <div class="bird-card-body"><h2>9. ببغاء الكاكاريكي</h2><p>ببغاء نيوزيلندي الأصل، يحب الجري على أرضية القفص وله جبهة حمراء مميزة.</p><ul class="info-list"><li><b>الغذاء:</b> الفواكه والخضروات والحبوب المشكلة</li><li><b>الميزة:</b> سلوك فضولي ومضحك جداً أثناء الحركة</li></ul></div>
-        </div>
+            <!-- قسم 7 -->
+            <div id="b7" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/2085859/pexels-photo-2085859.jpeg?auto=compress&w=700" alt="الفيشر"></div>
+                <div class="bird-content">
+                    <h2>طيور الحب - الفيشر</h2>
+                    <p>تتميز بوجود حلقة بيضاء واضحة جداً ومميزة حول العين (الجفن). ألوانها زاهية للغاية تجمع بين الأخضر والبرتقالي والأحمر، وتتمتع بنشاط وقوة جسدية واضحة.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>خلطات الحبوب المشكلة، الفواكه الطازجة، والخضروات</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 9 إلى 13 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b10" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/1661179/pexels-photo-1661179.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الباركيت"></div>
-            <div class="bird-card-body"><h2>10. الببغاء الأخضر الصغير (الباركيت)</h2><p>طيور خضراء ذكية للغاية تشبه البادجي لكنها أكبر ولها قدرة على الاختلاط البشري.</p><ul class="info-list"><li><b>الغذاء:</b> الخضروات الورقية والحبوب المتنوعة</li><li><b>الميزة:</b> حب اللعب الشديد والتعلم السريع للألعاب</li></ul></div>
-        </div>
+            <!-- قسم 8 -->
+            <div id="b8" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/9310344/pexels-photo-9310344.jpeg?auto=compress&w=700" alt="الجاوة"></div>
+                <div class="bird-content">
+                    <h2>عصفور جاوة الهادئ</h2>
+                    <p>طائر هادئ وكبير الحجم نسبياً مقارنة بعصافير الفينش الأخرى، يمتاز بمنقاره الأحمر الكبير المصقول وخدوده البيضاء الدائرية، وهو منظم جداً داخل الأقفاص.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>الأرز الشعير، بذور الفلارس، وخلطات الفينش الكبيرة</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 5 إلى 8 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b11" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/4090007/pexels-photo-4090007.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الموزايك"></div>
-            <div class="bird-card-body"><h2>11. كناري الموزايك</h2><p>نوع فاخر من الكناري يتميز بتوزيع هندسي مذهل للألوان الحمراء على خلفية بيضاء.</p><ul class="info-list"><li><b>الغذاء:</b> أغذية مخصصة لإبراز اللون الأحمر بانتظام</li><li><b>الميزة:</b> مظهر ملكي أنيق جداً في مسابقات الطيور</li></ul></div>
-        </div>
+            <!-- قسم 9 -->
+            <div id="b9" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/10360844/pexels-photo-10360844.jpeg?auto=compress&w=700" alt="الكاكاريكي"></div>
+                <div class="bird-content">
+                    <h2>ببغاء الكاكاريكي المضحك</h2>
+                    <p>ببغاء نيوزيلندي الأصل فريد من نوعه، يحب الجري والقفز على أرضية القفص أكثر من الطيران، وله جبهة حمراء مميزة وسلوك فضولي مضحك ومسلي للغاية أثناء الحركة.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>الفواكه، الخضروات، الخيار، والحبوب المشكلة وفير المكونات</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 8 إلى 12 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b12" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/11832049/pexels-photo-11832049.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الحسون"></div>
-            <div class="bird-card-body"><h2>12. طائر الحسون الأوراسي</h2><p>طائر بري غاية في الجمال، يُربى في الأقفاص لجمال شكله وتغريده الخيالي المتنوع.</p><ul class="info-list"><li><b>الغذاء:</b> بذور الشوك والقمبز والنيجر</li><li><b>الميزة:</b> أقوى وأجمل التغريدات العذبة في الطبيعة</li></ul></div>
-        </div>
+            <!-- قسم 10 -->
+            <div id="b10" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/1661179/pexels-photo-1661179.jpeg?auto=compress&w=700" alt="الباركيت"></div>
+                <div class="bird-content">
+                    <h2>الببغاء الأخضر الصغير (الباركيت)</h2>
+                    <p>طيور خضراء ذكية للغاية تشبه البادجي الأسترالي لكنها أكبر حجماً ولها ذيل طويل، تتمتع بذكاء حاد وقدرة ممتازة على الاختلاط البشري وحب اللعب الدائم بالألعاب.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>الخضروات الورقية، الحبوب المتنوعة، ووجبات الإطعام اللينة</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 10 إلى 15 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b13" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/10153032/pexels-photo-10153032.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الكاردينال"></div>
-            <div class="bird-card-body"><h2>13. طائر الكاردينال الأحمر</h2><p>طائر يتميز بلونه الأحمر القرمزي الزاهي بالكامل وقناعه الأسود حول منقاره الشديد.</p><ul class="info-list"><li><b>الغذاء:</b> الحبوب الكبيرة والتوت والديدان المجففة</li><li><b>الميزة:</b> لون بري جذاب جداً ونادر التربية</li></ul></div>
-        </div>
+            <!-- قسم 11 -->
+            <div id="b11" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/4090007/pexels-photo-4090007.jpeg?auto=compress&w=700" alt="الموزايك"></div>
+                <div class="bird-content">
+                    <h2>كناري الموزايك الفاخر</h2>
+                    <p>نوع من الكناري يتميز بتوزيع هندسي مذهل للألوان الحمراء أو الصفراء الزاهية على خلفية بيضاء كلوحات الفسيفساء، وهو من الأنواع المفضلة في مسابقات طيور الجمال والزينة.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>أغذية مخصصة للكناري مع محفزات لونية لإبراز الألوان</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 7 إلى 10 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b14" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/2263655/pexels-photo-2263655.jpeg?auto=compress&cs=tinysrgb&w=600" alt="البنجالي"></div>
-            <div class="bird-card-body"><h2>14. طائر البنجالي فينش</h2><p>طائر اجتماعي هادئ ولا يتشاجر أبداً، ويُستعان به كحاضن لبيض الطيور الأخرى لحنانه.</p><ul class="info-list"><li><b>الغذاء:</b> بنكم ناعم ووجبات لينة مستنبتة</li><li><b>الميزة:</b> حنان فائق في حضانة البيض وتأكيل الفروخ</li></ul></div>
-        </div>
+            <!-- قسم 12 -->
+            <div id="b12" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/11832049/pexels-photo-11832049.jpeg?auto=compress&w=700" alt="الحسون"></div>
+                <div class="bird-content">
+                    <h2>طائر الحسون الأوراسي الجميل</h2>
+                    <p>طائر بري غاية في الجمال والرشاقة، يقتنيه المحترفون لجمال شكله ذو الوجه الأحمر والقناع الجذاب وتغريده الخيالي المتنوع والمتغير باستمرار والذي يذهل المستمعين.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>بذور الشوك الطبيعية، بذور القمبز، والنيجر، والنباتات البرية</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 6 إلى 10 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
 
-        <div id="b15" class="bird-card">
-            <div class="bird-card-img"><img src="https://images.pexels.com/photos/4090003/pexels-photo-4090003.jpeg?auto=compress&cs=tinysrgb&w=600" alt="الكويكر"></div>
-            <div class="bird-card-body"><h2>15. ببغاء الكويكر (الراهب)</h2><p>ببغاء متوسط الحجم ذو لون أخضر ورمادي، ذكي لأبعد الحدود ومشهور بالقدرة على الكلام.</p><ul class="info-list"><li><b>الغذاء:</b> الفواكه المشكلة، الخضروات، وخلطات الببغاوات</li><li><b>الميزة:</b> متكلم ممتاز ومسلي جداً ويتعلق بالبشر بسرعة</li></ul></div>
+            <!-- قسم 13 -->
+            <div id="b13" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/10153032/pexels-photo-10153032.jpeg?auto=compress&w=700" alt="الكاردينال"></div>
+                <div class="bird-content">
+                    <h2>طائر الكاردينال الأحمر الناري</h2>
+                    <p>طائر زينة مذهل يتميز بلونه الأحمر القرمزي الزاهي بالكامل للذكور مع قناع أسود حول العين والمنقار، صوته وتغريده مميزان جداً وشكله يمنح المكان فخامة استثنائية.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>الحبوب الكبيرة، بذور عباد الشمس، التوت، والديدان المجففة</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 8 إلى 13 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- قسم 14 -->
+            <div id="b14" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/2263655/pexels-photo-2263655.jpeg?auto=compress&w=700" alt="البنجالي"></div>
+                <div class="bird-content">
+                    <h2>طائر البنجالي فينش الاجتماعي</h2>
+                    <p>طائر اجتماعي هادئ للغاية ولا يتشاجر مع رفقائه أبداً، يشتهر بكونه الأب البديل في عالم الطيور؛ حيث يستعين به المربون لحضانة وتأكيل فروخ الطيور النادرة لحنانه الشديد.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>حبوب البنكم الناعمة، الفلارس، ووجبات البيض المهروس اللينة</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 4 إلى 6 سنوات</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- قسم 15 -->
+            <div id="b15" class="bird-section">
+                <div class="bird-img"><img src="https://images.pexels.com/photos/4090003/pexels-photo-4090003.jpeg?auto=compress&w=700" alt="الكويكر"></div>
+                <div class="bird-content">
+                    <h2>ببغاء الكويكر (الراهب المتكلم)</h2>
+                    <p>ببغاء متوسط الحجم ذو لون أخضر جذاب وصدر رمادي، ذكي جداً ومشهور بقدرته الفائقة على الكلام وتقليد جمل المربي كاملة، كما أنه يرتبط بأفراد العائلة ويحب اللعب الدائم.</p>
+                    <table class="info-table">
+                        <tr><td class="title">النظام الغذائي:</td><td>الفواكه المشكلة، الخضروات، وخلطات الببغاوات وبذور عباد الشمس</td></tr>
+                        <tr><td class="title">متوسط العمر:</td><td>من 15 إلى 20 سنة</td></tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
     <footer>
-        <p>الموسوعة الكبرى لطيور الزينة © جميع الحقوق محفوظة 2026</p>
+        <p>الموسوعة الكبرى والأقسام التفاعلية لطيور الزينة © 2026</p>
     </footer>
+
+    <!-- الكود البرمجي السحري لتنظيم الأقسام وتبديلها -->
+    <script>
+        function openBird(evt, birdId) {
+            // إخفاء كل الأقسام أولاً
+            var i, birdSection, tabBtn;
+            birdSection = document.getElementsByClassName("bird-section");
+            for (i = 0; i < birdSection.length; i++) {
+                birdSection[i].classList.remove("active");
+            }
+
+            // إزالة اللون الأخضر من الأزرار غير النشطة
+            tabBtn = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtn.length; i++) {
+                tabBtn[i].classList.remove("active");
+            }
+
+            // إظهار القسم الذي ضغط عليه المربي فقط وتلوين زره باللون النشط
+            document.getElementById(birdId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
 
 </body>
 </html>
